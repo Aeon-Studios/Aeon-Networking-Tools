@@ -1,0 +1,48 @@
+{
+  "name": "aeon-networking-tools",
+  "version": "1.0.0",
+  "description": "A Windows-friendly desktop network toolkit built with Electron and a local Node.js server.",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "server": "node server/index.js",
+    "check": "node --check server/index.js && node --check server/network-tools.js && node --check electron/main.js && node --check public/app.js",
+    "dist": "powershell -NoProfile -Command \"$env:CSC_IDENTITY_AUTO_DISCOVERY='false'; electron-builder --win portable --config.win.signAndEditExecutable=false\""
+  },
+  "build": {
+    "appId": "com.aeon.networkingtools",
+    "productName": "AEON Networking Tools",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "server/**/*",
+      "public/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        "portable",
+        "nsis"
+      ]
+    }
+  },
+  "keywords": [
+    "network",
+    "diagnostics",
+    "electron",
+    "windows",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "electron": "^36.1.0",
+    "electron-builder": "^24.13.3"
+  }
+}

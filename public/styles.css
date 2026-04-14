@@ -1,0 +1,349 @@
+:root {
+  --bg: #06111d;
+  --bg-elevated: rgba(14, 28, 44, 0.82);
+  --surface: rgba(10, 23, 36, 0.88);
+  --surface-soft: rgba(135, 197, 255, 0.08);
+  --text: #e9f3ff;
+  --text-soft: #98adbf;
+  --line: rgba(144, 193, 255, 0.15);
+  --accent: #77d1ff;
+  --success: #5df2b0;
+  --warning: #ffd072;
+  --danger: #ff8e83;
+  --shadow: 0 26px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(18, 182, 255, 0.2), transparent 28%),
+    radial-gradient(circle at 85% 12%, rgba(93, 242, 176, 0.16), transparent 20%),
+    linear-gradient(160deg, #04101c 0%, #081522 48%, #061019 100%);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(119, 209, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(119, 209, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.app-shell {
+  width: min(1440px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  padding: 18px 4px 30px;
+}
+
+.eyebrow,
+.card-label {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.84rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.tool-card h3,
+.stat-card h2 {
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 4vw, 4.8rem);
+  line-height: 0.94;
+  max-width: 12ch;
+}
+
+.hero-text {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  color: var(--text-soft);
+  font-size: 1.05rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.btn-primary {
+  color: #04101a;
+  background: linear-gradient(135deg, var(--success), var(--accent));
+}
+
+.btn-secondary {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-grid,
+.content-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.dashboard-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.content-grid {
+  grid-template-columns: minmax(0, 1.4fr) minmax(360px, 0.9fr);
+}
+
+.main-column,
+.side-column {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: linear-gradient(180deg, var(--bg-elevated), var(--surface));
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.stat-card {
+  min-height: 164px;
+}
+
+.stat-card h2 {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.card-note,
+.tool-note {
+  color: var(--text-soft);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+}
+
+.tool-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 16px;
+}
+
+.tool-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+.tool-form .wide {
+  grid-column: 1 / -1;
+}
+
+input {
+  width: 100%;
+  border: 1px solid rgba(144, 193, 255, 0.18);
+  border-radius: 16px;
+  background: rgba(6, 16, 27, 0.78);
+  color: var(--text);
+  padding: 12px 14px;
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid rgba(119, 209, 255, 0.25);
+  border-color: rgba(119, 209, 255, 0.36);
+}
+
+.result-panel,
+.activity-feed {
+  font-family: "IBM Plex Mono", monospace;
+  background: var(--surface-soft);
+  border: 1px solid rgba(144, 193, 255, 0.12);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.result-panel {
+  min-height: 96px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.result-panel.empty,
+.activity-empty {
+  color: var(--text-soft);
+}
+
+.result-title {
+  margin: 0 0 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.1rem;
+}
+
+.result-meta {
+  display: grid;
+  gap: 8px;
+}
+
+.kv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.kv-row:last-child {
+  border-bottom: 0;
+}
+
+.kv-key {
+  color: var(--text-soft);
+}
+
+.status-good {
+  color: var(--success);
+}
+
+.status-warn {
+  color: var(--warning);
+}
+
+.status-bad {
+  color: var(--danger);
+}
+
+.activity-feed {
+  display: grid;
+  gap: 12px;
+}
+
+.activity-item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(5, 14, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.activity-item strong {
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.adapter-card {
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  background: rgba(5, 14, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.adapter-card:last-child {
+  margin-bottom: 0;
+}
+
+.adapter-card h4 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.adapter-address {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  color: var(--text-soft);
+}
+
+.adapter-address span:last-child {
+  color: var(--text);
+}
+
+.trace-output {
+  margin: 0;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 1180px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    width: min(100vw - 18px, 100%);
+    padding-top: 16px;
+  }
+
+  .hero,
+  .card-header {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .dashboard-grid,
+  .tool-form {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AEON Networking Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Windows Desktop Toolkit</p>
+          <h1>AEON Networking Tools</h1>
+          <p class="hero-text">
+            Check internet health, benchmark download speed, test websites, probe ports, inspect DNS,
+            and review local adapter details from one desktop window.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="refresh-overview" class="btn btn-secondary">Refresh Overview</button>
+          <button id="run-internet-check" class="btn btn-primary">Run Internet Check</button>
+        </div>
+      </header>
+
+      <section class="dashboard-grid">
+        <article class="card stat-card">
+          <p class="card-label">Hostname</p>
+          <h2 id="hostname">Loading...</h2>
+          <p id="platform" class="card-note">Reading system information</p>
+        </article>
+        <article class="card stat-card">
+          <p class="card-label">Public IP</p>
+          <h2 id="public-ip">Checking...</h2>
+          <p class="card-note">External address when available</p>
+        </article>
+        <article class="card stat-card">
+          <p class="card-label">Active Adapters</p>
+          <h2 id="active-interfaces">0</h2>
+          <p class="card-note">Interfaces with usable addresses</p>
+        </article>
+        <article class="card stat-card">
+          <p class="card-label">Internet Health</p>
+          <h2 id="internet-health">Waiting</h2>
+          <p id="internet-note" class="card-note">Run the quick check to verify connectivity.</p>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div class="main-column">
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">Speed Test</p>
+                <h3>Quick download benchmark</h3>
+              </div>
+              <button class="btn btn-primary" data-action="speed-test">Run Test</button>
+            </div>
+            <p class="tool-note">Uses a Cloudflare download test to estimate throughput and response time.</p>
+            <div id="speed-test-result" class="result-panel empty">No speed test has been run yet.</div>
+          </article>
+
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">Ping</p>
+                <h3>Latency and packet loss</h3>
+              </div>
+              <button class="btn btn-primary" data-action="ping">Run Ping</button>
+            </div>
+            <form class="tool-form" data-form="ping">
+              <label>
+                Target
+                <input name="target" type="text" value="1.1.1.1" placeholder="1.1.1.1 or google.com" />
+              </label>
+              <label>
+                Count
+                <input name="count" type="number" value="4" min="1" max="8" />
+              </label>
+            </form>
+            <div id="ping-result" class="result-panel empty">No ping results yet.</div>
+          </article>
+
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">DNS Lookup</p>
+                <h3>Resolve a domain</h3>
+              </div>
+              <button class="btn btn-primary" data-action="dns">Look Up</button>
+            </div>
+            <form class="tool-form" data-form="dns">
+              <label class="wide">
+                Domain
+                <input name="target" type="text" value="openai.com" placeholder="example.com" />
+              </label>
+            </form>
+            <div id="dns-result" class="result-panel empty">DNS answers will appear here.</div>
+          </article>
+
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">Port Probe</p>
+                <h3>Check TCP access</h3>
+              </div>
+              <button class="btn btn-primary" data-action="port-check">Probe Port</button>
+            </div>
+            <form class="tool-form" data-form="port-check">
+              <label>
+                Host
+                <input name="host" type="text" value="8.8.8.8" placeholder="Host or IP" />
+              </label>
+              <label>
+                Port
+                <input name="port" type="number" value="53" min="1" max="65535" />
+              </label>
+            </form>
+            <div id="port-check-result" class="result-panel empty">Port status will appear here.</div>
+          </article>
+        </div>
+
+        <div class="side-column">
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">HTTP Check</p>
+                <h3>Test website reachability</h3>
+              </div>
+              <button class="btn btn-primary" data-action="http-check">Send Request</button>
+            </div>
+            <form class="tool-form" data-form="http-check">
+              <label class="wide">
+                URL
+                <input name="url" type="text" value="https://openai.com" placeholder="https://example.com" />
+              </label>
+            </form>
+            <div id="http-check-result" class="result-panel empty">HTTP response details will appear here.</div>
+          </article>
+
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">Traceroute</p>
+                <h3>Inspect route path</h3>
+              </div>
+              <button class="btn btn-primary" data-action="traceroute">Trace Route</button>
+            </div>
+            <form class="tool-form" data-form="traceroute">
+              <label>
+                Target
+                <input name="target" type="text" value="1.1.1.1" placeholder="Host or IP" />
+              </label>
+              <label>
+                Max hops
+                <input name="maxHops" type="number" value="12" min="4" max="30" />
+              </label>
+            </form>
+            <div id="traceroute-result" class="result-panel empty">Traceroute output will appear here.</div>
+          </article>
+
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">Adapters</p>
+                <h3>Local network interfaces</h3>
+              </div>
+              <button class="btn btn-secondary" data-action="refresh-interfaces">Refresh</button>
+            </div>
+            <div id="interfaces-result" class="result-panel empty">Adapter details will load automatically.</div>
+          </article>
+
+          <article class="card tool-card">
+            <div class="card-header">
+              <div>
+                <p class="card-label">Activity Feed</p>
+                <h3>Recent checks</h3>
+              </div>
+            </div>
+            <div id="activity-feed" class="activity-feed">
+              <p class="activity-empty">No actions yet.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <template id="key-value-template">
+      <div class="kv-row">
+        <span class="kv-key"></span>
+        <span class="kv-value"></span>
+      </div>
+    </template>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
